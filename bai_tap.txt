@@ -1,0 +1,113 @@
+Microsoft Windows [Version 10.0.18362.836]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\daoxu>mysql -u root -p
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 143
+Server version: 8.0.20 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases'
+    '> ;
+    '> '
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''
+;
+'' at line 1
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| classicmodels      |
+| information_schema |
+| library            |
+| mysql              |
+| performance_schema |
+| sakila             |
+| showroom           |
+| sys                |
+| world              |
+| xuan_dong          |
++--------------------+
+11 rows in set (0.05 sec)
+
+mysql> use xuan_dong
+Database changed
+mysql> create table sinh_vien
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table sinh_vien (
+    -> id int auto_increment primary key,
+    -> ten text,
+    -> tuoi TINYINT ,
+    -> khoahoc varchar(15),
+    -> sotien int);
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> insert into (ten,tuoi,khoahoc,sotien) values (Hoang,21,CNTT,400000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ten,tuoi,khoahoc,sotien) values (Hoang,21,CNTT,400000)' at line 1
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values (Hoang,21,CNTT,400000);
+ERROR 1054 (42S22): Unknown column 'Hoang' in 'field list'
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Hoang',21,'CNTT',400000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Viet',19,'DTVT',320000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Thanh',18,'KTDN',400000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Nhan',19,'CK',450000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Huong',20,'TCNH',500000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sinh_vien(ten,tuoi,khoahoc,sotien) values ('Huong',20,'TCNH',200000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from sinh_vien
+    -> where name = 'Huong';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> select * from sinh_vien
+    -> where ten = 'Huong';
++----+-------+------+---------+--------+
+| id | ten   | tuoi | khoahoc | sotien |
++----+-------+------+---------+--------+
+|  5 | Huong |   20 | TCNH    | 500000 |
+|  6 | Huong |   20 | TCNH    | 200000 |
++----+-------+------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(sotien) from sinh_vien
+    -> where ten = 'Huong';
++-------------+
+| sum(sotien) |
++-------------+
+|      700000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct ten from sinh_vien;
++-------+
+| ten   |
++-------+
+| Hoang |
+| Viet  |
+| Thanh |
+| Nhan  |
+| Huong |
++-------+
+5 rows in set (0.00 sec)
+
+mysql>
